@@ -32,15 +32,15 @@ describe('Test Airport project', () => {
 
     it('should have military Planes with transport type', () => {
         let airport = new Airport(planes);
-        let transportMilitaryPlanes = airport.getTransportMilitaryPlanes();
-        let flag = false;
-        for (let militaryPlane of transportMilitaryPlanes) {
+        let transportAndMilitaryPlanes = airport.getTransportMilitaryPlanes();
+        let isThereMilitaryPlanesWithTransportType = false;
+        for (let militaryPlane of transportAndMilitaryPlanes) {
             if (militaryPlane.getMilitaryType() === MILITARY_TYPES.TRANSPORT) {
-                flag = true;
+                isThereMilitaryPlanesWithTransportType = true;
                 break;
             }
         }
-        assert.equal(flag,true);
+        assert.equal(isThereMilitaryPlanesWithTransportType,true);
     });
 
     it('should check passenger plane with max capacity', () => {
@@ -50,8 +50,7 @@ describe('Test Airport project', () => {
     });
 
 
-    it('test 3', () => {
-        console.log("TEST testGetPassengerPlaneWithMaxCapacity started!");
+    it('should get Passenger plane with max capacity', () => {
         let airport = new Airport(planes);
         airport.sortByMaxLoadCapacity();
         let planesSortedByMaxLoadCapacity = airport.getPlanes();
@@ -67,15 +66,15 @@ describe('Test Airport project', () => {
         assert.isTrue(nextPlaneMaxLoadCapacityIsHigherThanCurrent);
     })
 
-    it('testHasAtLeastOneBomberInMilitaryPlanes', () => {
+    it('should pass if there is at least one bomber in Military planes', () => {
         let airport = new Airport(planes);
         let bomberMilitaryPlanes  = airport.getBomberMilitaryPlanes ();
-        let flag = false;
+        let isThereBomberInMilitaryPlanes = false;
         for (let militaryPlane of bomberMilitaryPlanes) {
             if (militaryPlane.getMilitaryType() === MILITARY_TYPES.BOMBER) {
-                flag = true;
+                isThereBomberInMilitaryPlanes = true;
             }
-            else{
+            else {
                 assert.fail("Test failed!");
             }
         }
@@ -83,7 +82,7 @@ describe('Test Airport project', () => {
         // if not failed;
     })
 
-    it('should check that experimentsl planes has classification level higher than unclassified', () => {
+    it('should check that Experimental planes has classification level higher than UNCLASSIFIED', () => {
         let airport = new Airport(planes);
         let bomberMilitaryPlanes  = airport.getExperimentalPlanes ();
         let hasUnclassifiedPlanes  = false;
